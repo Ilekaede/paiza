@@ -29,5 +29,5 @@ for _ in range(N):
         count = 0
         max_count += 1
         now_direction = (1 + now_direction) % 4
-    
+
 print(X, Y)
