@@ -15,14 +15,22 @@ directions = ['N', 'E', 'S', 'W']
 firstDirection = 'N'
 now = directions.index(firstDirection)
 cnt = 0
+
+# 初期位置に'*'を置く
+list_str = list(S[sy])
+list_str[sx] = '*'
+S[sy] = ''.join(list_str)
+
 for i in range(100):
 
-    if i == t[cnt]:
-        if d[cnt] == 'L': # 方向転換
-            now = (3 + now) % 4
-        else:
-            now = (1 + now) % 4
-        cnt += 1
+    if cnt < N:
+        if i == t[cnt]:
+            if d[cnt] == 'L': # 方向転換
+                now = (3 + now) % 4
+            else:
+                now = (1 + now) % 4
+            cnt += 1
+
 
     past_sy, past_sx = sy, sx
     if directions[now] == 'N':
@@ -35,13 +43,17 @@ for i in range(100):
         sx -= 1
 
     if sx >= W or sx < 0 or sy >= H or sy < 0:
-        print('Stop')
         break
-    elif S[sy][sx] == '#':
-        print('Stop')
+    elif S[sy][sx] == '#' or S[sy][sx] == '*':
         break
     else:
-        print(sy, sx)
+        list_str = list(S[sy])
+        list_str[sx] = '*'
+        S[sy] = ''.join(list_str)
+
+
+for i in range(H):
+    print(S[i])
 
 
 
